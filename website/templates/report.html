@@ -1,17 +1,59 @@
 {% extends "base.html" %}
 {% block content %}
+<style>    
+    /* Hide the browser's default radio button */
+    .reportBtns {
+        text-align: center;
+        padding: 15px;
+    }
+    #success:checked + label{ 
+        background-color: #1e7e34;
+    }
+    #warning:checked + label{ 
+        background-color: #d39e00;
+    }
+    #danger:checked + label{ 
+        background-color: #bd2130;
+    }
+    #secondary:checked + label{ 
+        background-color: #545b62;
+    }
+</style>
 <form>
-    <!-- {% for i in range(1,11) %}
-    <input type="radio" id="status{{i}}" name="status" value="{{i}}">
-    <label for="status">{{i}}</label>
-    <br>
-    {% endfor %} -->
     <h2 class="text-center">Estimate the amount of food in the pantry:</h2>
-    <div class="container text-center report-button">
-        <!-- <div><input type="submit" value="Submit" onclick="window.location='/'" class="block" style="margin-bottom: 20px;"></div> -->
-        <input type="submit" name="status" value="Full" class="btn btn-success btn-block report-button">
-        <input type="submit" name="status" value="Half Full" class="btn btn-warning btn-block report-button">
-        <input type="submit" name="status" value="Empty" class="btn btn-danger btn-block report-button">
+    <br>
+    <div class="container report-button">
+        <!-- <input type="radio" onclick="btnCheck=true" name="status" value="Full" id='full'>
+        <input type="radio" onclick="click()" name="status" value="Half Full" id='halfFull' class="btn btn-warning btn-block report-button">
+        <input type="radio" onclick="click()" name="status" value="Empty" id='empty' class="btn btn-danger btn-block report-button">
+        <input type="radio" onclick="click()" name="status" value="Damaged" id='damaged' class="btn btn-dark btn-block report-button"> -->
+        <input type="radio" onclick="btnCheck=true" class="btn-check" name="status" id="success" value="Full" autocomplete="off" style="display: none;">
+        <label class="btn btn-success btn-block reportBtns" for="success">Full</label>
+        <p height="20px"></p>
+        <input type="radio" onclick="btnCheck=true" class="btn-check" name="status" id="warning" value="Half Full" autocomplete="off" style="display: none;">
+        <label class="btn btn-warning btn-block reportBtns" for="warning">Half Full</label>
+        <p height="20px"></p>
+        <input type="radio" onclick="btnCheck=true" class="btn-check" name="status" id="danger" value="Empty" autocomplete="off" style="display: none;">
+        <label class="btn btn-danger btn-block reportBtns" for="danger">Empty</label>
+        <p height="20px"></p>
+        <input type="radio" onclick="btnCheck=true" class="btn-check" name="status" id="secondary" value="Damaged" autocomplete="off" style="display: none;">
+        <label class="btn btn-secondary btn-block reportBtns" for="secondary">Damaged</label>
+        <p height="20px"></p>
+        <button onclick="return noSelectAlert()" name="submit" value="Submit" id='subBtn' class="btn btn-primary btn-block">Submit</button>
     </div>
+    <script>
+        let btnCheck = false;
+    
+        function noSelectAlert() {
+            if(btnCheck){
+                return true; 
+            }
+            else{
+                alert('No status has been selected.');
+                return false;
+            }   
+        }
+    </script>
 </form>
 {% endblock %}
+
